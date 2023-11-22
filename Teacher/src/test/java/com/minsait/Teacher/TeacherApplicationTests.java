@@ -10,4 +10,8 @@ class TeacherApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	void mainMethodsRun(){
+		TeacherApplication.main(new String[] {});
+	}
 }
