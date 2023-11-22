@@ -1,11 +1,17 @@
-package com.minsait.Gateway;
+package com.minsait.Teacher;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class GatewayApplicationTests {
+class TeacherApplicationTests {
+
 	@Test
 	void contextLoads() {
+	}
+
+	@Test
+	void mainMethodsRun(){
+		TeacherApplication.main(new String[] {});
 	}
 }
