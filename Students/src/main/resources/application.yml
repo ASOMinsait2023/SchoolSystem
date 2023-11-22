@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: msvc-students
+  config:
+    import:
+      optional:configserver:http://localhost:8888
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/SchoolSystem
+    username: postgres
+    password: postgres
