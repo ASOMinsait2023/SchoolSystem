@@ -1,6 +1,7 @@
 package com.minsait.Students.models.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Entity
@@ -18,6 +19,7 @@ public class Student {
     @Column(name = "last_name")
     private String lastName;
     private int age;
+    @Email
     private String email;
     @ManyToOne
     @JoinColumn(name = "career_id", nullable = false)
