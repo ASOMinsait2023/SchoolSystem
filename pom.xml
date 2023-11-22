@@ -29,6 +29,7 @@
         <module>Configuration</module>
         <module>Eureka</module>
         <module>Gateway</module>
+        <module>Teacher</module>
         <module>Subject</module>
     </modules>
 
