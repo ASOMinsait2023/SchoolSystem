@@ -22,7 +22,8 @@ public class Student {
     @Email
     private String email;
     @ManyToOne
-    @JoinColumn(name = "career_id", nullable = false)
+    @JoinColumn(name = "career_id")
     private Career career;
-
+    @Column(name = "actual_credits")
+    private int actualCredits = 0;
 }

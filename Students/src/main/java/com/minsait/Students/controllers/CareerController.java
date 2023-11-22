@@ -19,15 +19,15 @@ public class CareerController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getCareer(@PathVariable("id") Long id){
-        return new ResponseEntity<>(careerService.findById(id), HttpStatus.OK);
+        return new ResponseEntity<>(careerService.getById(id), HttpStatus.OK);
     }
 
-    @PostMapping()
+    @PostMapping("/save")
     public ResponseEntity<?> create(@RequestBody Career career){
         careerService.save(career);
         Map<String, Object> response = new HashMap<>();
         response.put("status", "Created");
-        response.put("message", "career created");
+        response.put("message", "Career created");
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 

@@ -2,9 +2,12 @@ package com.minsait.Students.services;
 
 import com.minsait.Students.models.entities.Career;
 
+import java.util.List;
+
 public interface ICareerService {
 
     void save(Career career);
-    Career findById(Long id);
-    Career findByName(String name);
+    List<Career> getAll();
+    Career getById(Long id);
+    Career getByName(String name);
 }

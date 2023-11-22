@@ -28,7 +28,7 @@ public class StudentServiceImpl implements IStudentService{
 
     @Transactional(readOnly = true)
     @Override
-    public Student findById(Long id) {
+    public Student getById(Long id) {
         return studentRepository.findById(id).orElseThrow();
     }
 
@@ -50,7 +50,7 @@ public class StudentServiceImpl implements IStudentService{
 
     @Transactional
     @Override
-    public void addCareerToStudent(Long studentId, String careerName) {
+    public void addStudentToCareer(Long studentId, String careerName) {
         Optional<Student> student = studentRepository.findById(studentId);
         Optional<Career> career = careerRepository.findByName(careerName);
         if(student.isPresent() && career.isPresent()){
@@ -60,6 +60,21 @@ public class StudentServiceImpl implements IStudentService{
             throw new NoSuchElementException("one or both elements not found");
         }
 
+    }
+
+    @Override
+    public String checkStudentProgress(Long studentId, String careerName) {
+        Optional<Student> student = studentRepository.findById(studentId);
+        Optional<Career> career = careerRepository.findByName(careerName);
+        if(student.isPresent() && career.isPresent()){
+            int careerCredits = career.get().getTotalCredits();
+            int studentCredits = student.get().getActualCredits();
+            double progressCredits = (double) (studentCredits * 100) / careerCredits;
+            String progress = "The progress is: " + progressCredits + "%";
+            return progress;
+        }else{
+            throw new NoSuchElementException("one or both elements not found");
+        }
     }
 
 }
