@@ -1,6 +1,6 @@
 spring:
   application:
-    name: msvc-subject
+    name: msvc-classroom
   datasource:
     url: jdbc:postgresql://localhost:5432/SchoolSystem
     username: postgres

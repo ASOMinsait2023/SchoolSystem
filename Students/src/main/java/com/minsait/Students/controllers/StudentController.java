@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -76,6 +77,16 @@ public class StudentController {
         Map<String, Object> response = new HashMap<>();
         response.put("Status", "OK");
         response.put("Message", message);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/get-required-students")
+    public ResponseEntity<?> getRequiredStudents(@RequestBody List<Long> studentsIds){
+        List<Student> students = studentService.getStudentsInformation(studentsIds);
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", HttpStatus.OK.value());
+        response.put("message", "The following list are students found");
+        response.put("body", students);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

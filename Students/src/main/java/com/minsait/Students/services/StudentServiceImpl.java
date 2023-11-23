@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -76,5 +77,16 @@ public class StudentServiceImpl implements IStudentService{
             throw new NoSuchElementException("one or both elements not found");
         }
     }
+
+    @Override
+    public List<Student> getStudentsInformation(List<Long> requiredStudents) {
+        List<Student> students = new ArrayList<>();
+        for(Long studentId : requiredStudents){
+            Optional<Student> student = studentRepository.findById(studentId);
+            student.ifPresent(students::add);
+        }
+        return students;
+    }
+
 
 }
