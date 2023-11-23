@@ -14,6 +14,7 @@ public class ControllerAdvice {
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<?> noSuchElementException(NoSuchElementException exception){
         Map<String, Object> response = new HashMap<>();
+        response.put("status", HttpStatus.NOT_FOUND.value());
         response.put("message", exception.getMessage());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
