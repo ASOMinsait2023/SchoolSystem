@@ -1,12 +1,12 @@
 server:
-  port: 9091
+  port: 8083
 spring:
   application:
     name: msvc-teacher
   datasource:
-    url: jdbc:postgresql://localhost:5432/prueba
+    url: jdbc:postgresql://localhost:5432/SchoolSystem
     username: postgres
-    password: root
+    password: postgres
     driver-class-name: org.postgresql.Driver
   jpa:
     properties:
