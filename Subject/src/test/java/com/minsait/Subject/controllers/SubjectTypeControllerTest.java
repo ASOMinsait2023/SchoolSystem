@@ -41,9 +41,9 @@ class SubjectTypeControllerTest {
         mockMvc.perform(get("/api/v1/subject_types").contentType(MediaType.APPLICATION_JSON))
                 .andExpectAll(
                         status().isOk(),
-                        jsonPath("$.subjectTypes").exists(),
-                        jsonPath("$.subjectTypes[*].id").isNotEmpty(),
-                        jsonPath("$.subjectTypes[*].subjectType").isNotEmpty()
+                        jsonPath("$.body").exists(),
+                        jsonPath("$.body[*].id").isNotEmpty(),
+                        jsonPath("$.body[*].subjectType").isNotEmpty()
                 );
     }
 
@@ -54,9 +54,9 @@ class SubjectTypeControllerTest {
         mockMvc.perform(get("/api/v1/subject_types/all_pretty").contentType(MediaType.APPLICATION_JSON))
                 .andExpectAll(
                         status().isOk(),
-                        jsonPath("$.subjectTypes").exists(),
-                        jsonPath("$.subjectTypes[*].id").isNotEmpty(),
-                        jsonPath("$.subjectTypes[*].subjectType").isNotEmpty()
+                        jsonPath("$.body").exists(),
+                        jsonPath("$.body[*].id").isNotEmpty(),
+                        jsonPath("$.body[*].subjectType").isNotEmpty()
                 );
     }
 
@@ -67,9 +67,9 @@ class SubjectTypeControllerTest {
         mockMvc.perform(get("/api/v1/subject_types/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpectAll(
                         status().isOk(),
-                        jsonPath("$.subjectType").exists(),
-                        jsonPath("$.subjectType.id").isNotEmpty(),
-                        jsonPath("$.subjectType.subjectType").isNotEmpty()
+                        jsonPath("$.body").exists(),
+                        jsonPath("$.body.id").isNotEmpty(),
+                        jsonPath("$.body.subjectType").isNotEmpty()
                 );
     }
 

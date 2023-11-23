@@ -39,8 +39,8 @@ class DegreeControllerTest{
     void testFindAll() throws Exception{
         when(service.findAll()).thenReturn(List.of(Data.createDegree().get(), Data.createDegree2().get()));
         mvc.perform(get("/api/v1/degree/list").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$[0].name").value("Doctorate"))
-                .andExpect(jsonPath("$[1].name").value("Master"))
+                .andExpect(jsonPath("$.body.[0].name").value("Doctorate"))
+                .andExpect(jsonPath("$.body.[1].name").value("Master"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -49,8 +49,8 @@ class DegreeControllerTest{
     void testFindById() throws Exception{
         when(service.findById(anyLong())).thenReturn(Data.createDegree().get());
         mvc.perform(get("/api/v1/degree/list/1").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.name").value("Doctorate"))
-                .andExpect(jsonPath("$.speciality").value("Mathematics"))
+                .andExpect(jsonPath("$.body.name").value("Doctorate"))
+                .andExpect(jsonPath("$.body.speciality").value("Mathematics"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -60,9 +60,9 @@ class DegreeControllerTest{
         Degree degree= Data.createDegree().get();
         mvc.perform(post("/api/v1/degree/create").contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(degree)))
-                .andExpect(jsonPath("$.id").value(1L))
-                .andExpect(jsonPath("$.name").value("Doctorate"))
-                .andExpect(jsonPath("$.speciality").value("Mathematics"))
+                .andExpect(jsonPath("$.body.id").value(1L))
+                .andExpect(jsonPath("$.body.name").value("Doctorate"))
+                .andExpect(jsonPath("$.body.speciality").value("Mathematics"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
     }
