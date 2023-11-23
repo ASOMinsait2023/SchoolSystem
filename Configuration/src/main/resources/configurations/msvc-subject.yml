@@ -4,9 +4,9 @@ spring:
   application:
     name: msvc-subject
   datasource:
-    url: jdbc:postgresql://localhost:5432/SchoolSystem
+    url: jdbc:postgresql://localhost:5432/prueba
     username: postgres
-    password: postgres
+    password: root
   jpa:
     properties:
       hibernate:

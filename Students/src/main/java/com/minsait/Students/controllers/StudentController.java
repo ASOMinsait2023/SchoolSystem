@@ -80,8 +80,8 @@ public class StudentController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/get-required-students")
-    public ResponseEntity<?> getRequiredStudents(@RequestBody List<Long> studentsIds){
+    @GetMapping(value = "/get-required-students", params = {"studentsIds"} )
+    public ResponseEntity<?> getRequiredStudents(@RequestParam List<Long> studentsIds){
         List<Student> students = studentService.getStudentsInformation(studentsIds);
         Map<String, Object> response = new HashMap<>();
         response.put("status", HttpStatus.OK.value());
