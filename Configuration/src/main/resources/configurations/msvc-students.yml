@@ -1,3 +1,5 @@
+server:
+  port: 8081
 spring:
   application:
     name: msvc-students
@@ -6,15 +8,12 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
       show-sql: true
   datasource:
     url: jdbc:postgresql://localhost:5432/SchoolSystem
     username: postgres
     password: postgres
-
-server:
-  port: 8081
 
 springdoc:
   swagger-ui.path: /swagger-ui.html
