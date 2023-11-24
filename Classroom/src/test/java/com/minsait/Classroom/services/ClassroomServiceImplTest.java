@@ -96,6 +96,15 @@ class ClassroomServiceImplTest {
     }
 
     @Test
+    void testFindNonExistId() {
+        when(classroomRepository.findById(anyLong())).thenThrow(NoSuchElementException.class);
+        //when
+        assertThrows(NoSuchElementException.class, ()->{
+            Classroom result = classroomService.findById(1L);
+        });
+    }
+
+    @Test
     void testAddStudent() {
         //given
         Long classroomId = 1L;

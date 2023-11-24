@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -55,6 +56,16 @@ class ClassroomControllerTest {
                .contentType(MediaType.APPLICATION_JSON))
                .andExpect(status().isOk())
                .andExpect(jsonPath("$.message").value("Student with id: 1 added successfully"));
+    }
+
+    @Test
+    void testNonExistClassroom() throws Exception {
+        //given
+        doThrow(NoSuchElementException.class).when(classroomService).addStudent(anyLong(), anyLong());
+        //when - then
+        mvc.perform(put("/api/v1/classrooms/add-student?classroomId=1&studentId=1")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
     }
 
     @Test

@@ -11,11 +11,20 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<?> notFoundExceptionHandler(NoSuchElementException exception){
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", "404");
+        response.put("message", "No value present");
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
 
     @ExceptionHandler(SQLException.class)
     public ResponseEntity<?> sqlExceptionHandler(SQLException exception){
