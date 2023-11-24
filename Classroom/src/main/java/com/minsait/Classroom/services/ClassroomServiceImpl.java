@@ -10,6 +10,7 @@ import com.minsait.Classroom.repositories.StudentClassroomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -26,6 +27,7 @@ public class ClassroomServiceImpl implements IClassroomService{
     @Autowired
     private TeacherClient teacherClient;
     @Override
+    @Transactional
     public void save(Classroom classroom) {
         ResponseEntity<?> subjectResponse =  subjectClient.findById(classroom.getSubjectId());
         ResponseEntity<?> teacherResponse = teacherClient.findById(classroom.getTeacherId());
@@ -34,11 +36,13 @@ public class ClassroomServiceImpl implements IClassroomService{
         }
     }
     @Override
+    @Transactional(readOnly = true)
     public Classroom findById(Long id) {
         return classroomRepository.findById(id).orElseThrow();
     }
 
     @Override
+    @Transactional
     public void addStudent(Long classroomId, Long studentId) {
         Classroom classroom = classroomRepository.findById(classroomId).orElseThrow();
         StudentClassroom studentClassroom = new StudentClassroom();
@@ -55,6 +59,8 @@ public class ClassroomServiceImpl implements IClassroomService{
         }
     }
 
+    @Transactional(readOnly = true)
+    @Override
     public Map<String,Object> getStudentsIds(Classroom classroom){
         List<Long> studentsIds =  studentClassroomRepository.getAllStudentsByClassroom(classroom);
         ResponseEntity<?> studentsInfoResponse = studentClient.getRequiredStudents(studentsIds);
@@ -65,15 +71,7 @@ public class ClassroomServiceImpl implements IClassroomService{
     }
 
     @Override
-    public void addSubject(Long idClassroom, Long idSubject) {
-        Classroom classroom = classroomRepository.findById(idClassroom).orElseThrow();
-        ResponseEntity<?> subjectResponse =  subjectClient.findById(idSubject);
-        if (subjectResponse.getStatusCode().is2xxSuccessful()) {
-            classroom.setSubjectId(idSubject);
-        }
-    }
-
-    @Override
+    @Transactional(readOnly = true)
     public List<Classroom> findAll() {
         return classroomRepository.findAll();
     }

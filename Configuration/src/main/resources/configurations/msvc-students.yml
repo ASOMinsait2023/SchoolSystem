@@ -11,9 +11,9 @@ spring:
       ddl-auto: create-drop
       show-sql: true
   datasource:
-    url: jdbc:postgresql://localhost:5432/prueba
+    url: jdbc:postgresql://localhost:5432/school_system
     username: postgres
-    password: root
+    password: postgres
 
 springdoc:
   swagger-ui.path: /swagger-ui.html

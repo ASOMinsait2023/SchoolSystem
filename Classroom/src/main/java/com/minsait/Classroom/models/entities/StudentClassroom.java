@@ -1,15 +1,15 @@
 package com.minsait.Classroom.models.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class StudentClassroom {
 
     @Id
@@ -18,7 +18,12 @@ public class StudentClassroom {
     @Column(name = "students_id", unique = true)
     private Long studentId;
     @ManyToOne
-    @JoinColumn(name = "student_id", nullable = false, updatable = false)
+    @JoinColumn(name = "classroom_id", nullable = false, updatable = false)
     private Classroom classroom;
+
+    @JsonBackReference
+    public Classroom getClassroom(){
+        return this.classroom;
+    }
 
 }

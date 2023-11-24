@@ -10,4 +10,8 @@ class ClasroomApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	void testMainMethod() {
+		ClasroomApplication.main(new String[] {});
+	}
 }

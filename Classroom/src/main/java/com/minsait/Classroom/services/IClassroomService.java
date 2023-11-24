@@ -11,6 +11,5 @@ public interface IClassroomService {
     Classroom findById(Long id);
     void addStudent(Long classroomId, Long studentId);
     Map<String,Object> getStudentsIds(Classroom classroom);
-    void addSubject(Long idClassroom, Long idSubject);
     List<Classroom> findAll();
 }
