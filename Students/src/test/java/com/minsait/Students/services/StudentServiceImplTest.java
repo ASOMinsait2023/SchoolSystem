@@ -11,6 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -143,6 +145,18 @@ class StudentServiceImplTest {
             studentService.checkStudentProgress(studentId, careerName);
         });
         assertEquals("one or both elements not found", exception.getMessage());
+    }
+
+    @Test
+    void testGetStudentsInformation() {
+        //given
+        List<Long> requiredStudents = Arrays.asList(1L);
+        Long studentId = 1L;
+        when(studentRepository.findById(studentId)).thenReturn(Optional.of(Datos.getStudent()));
+        //when
+        List<Student> students = studentService.getStudentsInformation(requiredStudents);
+        //then
+        assertEquals(1, students.size());
     }
 
 

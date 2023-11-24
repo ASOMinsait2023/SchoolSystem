@@ -13,6 +13,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import com.minsait.Students.Datos;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -127,5 +130,18 @@ class StudentControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value(200))
                 .andExpect(jsonPath("$.message").value("progress"));
+    }
+
+    @Test
+    void testGetRequiredStudents() throws Exception {
+        //given
+        List<Long> stdudentsId = Arrays.asList(1L, 2L, 3L);
+        List<Student> students = Datos.getStudentList();
+        when(studentService.getStudentsInformation(stdudentsId)).thenReturn(students);
+        //when
+        mvc.perform(get("/api/v1/students/get-required-students")
+                .param("studentsIds", "1, 2, 3"))
+                .andExpect(status().isOk());
+
     }
 }
