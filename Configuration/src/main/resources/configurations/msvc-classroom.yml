@@ -1,0 +1,18 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: msvc-classroom
+  datasource:
+    url: jdbc:postgresql://localhost:5432/school_system
+    username: postgres
+    password: root
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update

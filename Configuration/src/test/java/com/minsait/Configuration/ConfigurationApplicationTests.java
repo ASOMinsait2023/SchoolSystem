@@ -10,4 +10,8 @@ class ConfigurationApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	void main() {
+		ConfigurationApplication.main(new String[] {});
+	}
 }

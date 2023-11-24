@@ -36,6 +36,7 @@ build/
 
 ### VS Code ###
 .vscode/
+${ide_apx_maven_local_repository}/
 
 ### Mac OS ###
 .DS_Store
