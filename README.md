@@ -16,15 +16,12 @@ the information about them.
 - Clone the repository.
 - Open the project in your Terminal.
 - If you have Python 3.*.* installed, run the following command:
-```bash	python .\scripts\mvn.py --package
-```
+```python .\scripts\mvn.py --package```
 - If you want to see other command options, run the following command:
-```bash	python .\scripts\mvn.py --help
-```
+```python .\scripts\mvn.py --help```
 - All the jar files will be in the target folder of each module.
 - To run the jar files, run the following command:
-```bash	java -jar .\<Module_Name>\target\<Module_Name>-0.0.1-SNAPSHOT.jar
-``` 
+```java -jar .\<Module_Name>\target\<Module_Name>-0.0.1-SNAPSHOT.jar``` 
 - Order modules to run:
     1. Configuratiom
     2. Eureka
