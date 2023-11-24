@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: msvc-classroom
+  datasource:
+    url: jdbc:postgresql://localhost:5432/SchoolSystem
+    username: postgres
+    password: postgres
+  config:
+    import: optional:configserver:http://localhost:8888
+  jpa:
+    show:
+      sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: update

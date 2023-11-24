@@ -13,4 +13,6 @@ public interface IStudentService {
     void addStudentToCareer(Long studentId, String careerName);
     String checkStudentProgress(Long studentId, String careerName);
 
+    List<Student> getStudentsInformation(List<Long> requiredStudents);
+
 }
