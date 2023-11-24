@@ -39,8 +39,8 @@ class TeacherControllerTest {
     void testFindAll() throws Exception{
         when(service.findAll()).thenReturn(List.of(Data.createTeacher1().get(), Data.createTeacher2().get()));
         mvc.perform(get("/api/v1/teacher/list").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$[0].firstName").value("Mario"))
-                .andExpect(jsonPath("$[1].firstName").value("Juan"))
+                .andExpect(jsonPath("$.body.[0].firstName").value("Mario"))
+                .andExpect(jsonPath("$.body.[1].firstName").value("Juan"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -49,8 +49,8 @@ class TeacherControllerTest {
     void testFindById() throws Exception{
         when(service.findById(anyLong())).thenReturn(Data.createTeacher1().get());
         mvc.perform(get("/api/v1/teacher/list/1").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.firstName").value("Mario"))
-                .andExpect(jsonPath("$.lastName").value("Alexis"))
+                .andExpect(jsonPath("$.body.firstName").value("Mario"))
+                .andExpect(jsonPath("$.body.lastName").value("Alexis"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -60,10 +60,10 @@ class TeacherControllerTest {
         Teacher teacher= Data.createTeacher1().get();
         mvc.perform(post("/api/v1/teacher/create").contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(teacher)))
-                .andExpect(jsonPath("$.id").value(1L))
-                .andExpect(jsonPath("$.firstName").value("Mario"))
-                .andExpect(jsonPath("$.lastName").value("Alexis"))
-                .andExpect(jsonPath("$.degree.name").value("Doctorate"))
+                .andExpect(jsonPath("$.body.id").value(1L))
+                .andExpect(jsonPath("$.body.firstName").value("Mario"))
+                .andExpect(jsonPath("$.body.lastName").value("Alexis"))
+                .andExpect(jsonPath("$.body.degree.name").value("Doctorate"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
     }
@@ -74,10 +74,10 @@ class TeacherControllerTest {
         when(service.update(any(), anyLong())).thenReturn(teacher);
         mvc.perform(put("/api/v1/teacher/update/1").contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(teacher)))
-                .andExpect(jsonPath("$.id").value(1L))
-                .andExpect(jsonPath("$.firstName").value("Mario"))
-                .andExpect(jsonPath("$.lastName").value("Alexis"))
-                .andExpect(jsonPath("$.degree.name").value("Doctorate"))
+                .andExpect(jsonPath("$.body.id").value(1L))
+                .andExpect(jsonPath("$.body.firstName").value("Mario"))
+                .andExpect(jsonPath("$.body.lastName").value("Alexis"))
+                .andExpect(jsonPath("$.body.degree.name").value("Doctorate"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }

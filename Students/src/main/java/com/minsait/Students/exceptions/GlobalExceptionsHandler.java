@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
@@ -17,7 +18,7 @@ public class GlobalExceptionsHandler{
 
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<?> noSuchElementExceptionHandler(NoSuchElementException exception){
-        Map<String, Object> response = new HashMap<>();
+        Map<String, Object> response = new LinkedHashMap<>();
         response.put("Status", "Not found");
         response.put("Message", exception.getMessage());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);

@@ -4,9 +4,9 @@ spring:
   config:
     import: optional:configserver:http://localhost:8888
   datasource:
-    url: jdbc:postgresql://localhost:5432/prueba
+    url: jdbc:postgresql://localhost:5432/SchoolSystem
     username: postgres
-    password: root
+    password: postgres
     driver-class-name: org.postgresql.Driver
   jpa:
     properties:

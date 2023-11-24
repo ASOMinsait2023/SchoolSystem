@@ -41,8 +41,8 @@ class StudentControllerTest {
         mvc.perform(post("/api/v1/students/save")
                       .contentType(MediaType.APPLICATION_JSON)
                       .content(studentMapper))
-              .andExpect(jsonPath("$.Status").value("Created"))
-              .andExpect(jsonPath("$.Message").value("Student created"))
+              .andExpect(jsonPath("$.status").value(201))
+              .andExpect(jsonPath("$.message").value("Student created"))
               .andExpect(status().isCreated());
     }
 
@@ -62,9 +62,9 @@ class StudentControllerTest {
         when(studentService.getById(1L)).thenReturn(Datos.getStudent());
         mvc.perform(get("/api/v1/students/1")
                         .contentType(MediaType.APPLICATION_JSON))
-             .andExpect(jsonPath("$.id").value(1))
-             .andExpect(jsonPath("$.firstName").value(Datos.getStudent().getFirstName()))
-             .andExpect(jsonPath("$.email").value(Datos.getStudent().getEmail()))
+             .andExpect(jsonPath("$.body.id").value(1))
+             .andExpect(jsonPath("$.body.firstName").value(Datos.getStudent().getFirstName()))
+             .andExpect(jsonPath("$.body.email").value(Datos.getStudent().getEmail()))
              .andExpect(status().isOk());
     }
 
@@ -81,7 +81,7 @@ class StudentControllerTest {
         when(studentService.getAll()).thenReturn(Datos.getStudentList());
         mvc.perform(get("/api/v1/students")
                       .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.[0].firstName").value("Rodrigo"))
+                .andExpect(jsonPath("$.body.[0].firstName").value("Rodrigo"))
                 .andExpect(status().isOk());
     }
 
@@ -90,8 +90,8 @@ class StudentControllerTest {
         when(studentService.delete(1L)).thenReturn(true);
         mvc.perform(delete("/api/v1/students/1")
                        .contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.Status").value("OK"))
-            .andExpect(jsonPath("$.Message").value("Student with id: 1 deleted"))
+            .andExpect(jsonPath("$.status").value(200))
+            .andExpect(jsonPath("$.message").value("Student with id: 1 deleted"))
             .andExpect(status().isOk());
     }
 
@@ -125,7 +125,7 @@ class StudentControllerTest {
         mvc.perform(put("/api/v1/students/check-progress?studentId=1&careerName=Programacion")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.Status").value("OK"))
-                .andExpect(jsonPath("$.Message").value("progress"));
+                .andExpect(jsonPath("$.status").value(200))
+                .andExpect(jsonPath("$.message").value("progress"));
     }
 }

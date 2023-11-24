@@ -11,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/api/v1/teacher")
 @RestController
@@ -20,19 +22,30 @@ public class TeacherController {
     private ITeacherService teacherService;
 
     @GetMapping("/list")
-    @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Get all teachers")
     @ApiResponse(responseCode = "200", description = "OK")
-    public List<Teacher> findAll(){
-        return teacherService.findAll();
+    public ResponseEntity<?> findAll(){
+        List<Teacher> teachers=teacherService.findAll();
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("status", HttpStatus.OK.value());
+        response.put("message", "Teachers found");
+        response.put("body", teachers);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/list/{id}")
     @Operation(summary = "Get teacher by Id")
-    @ApiResponse(responseCode = "200", description = "OK")
-    public ResponseEntity<Teacher> findById(@PathVariable Long id){
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "404", description = "NOT_FOUND")
+    })
+    public ResponseEntity<?> findById(@PathVariable Long id){
         Teacher teacher=teacherService.findById(id);
-        return ResponseEntity.ok(teacher);
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("status", HttpStatus.OK.value());
+        response.put("message", "Teacher found");
+        response.put("body", teacher);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/create")
@@ -41,9 +54,13 @@ public class TeacherController {
             @ApiResponse(responseCode = "404", description = "NOT_FOUND")
     })
     @Operation(summary = "Create a new teacher", description="Create a new teacher if the degree ID exists")
-    public ResponseEntity<Teacher> create(@RequestBody Teacher teacher){
+    public ResponseEntity<?> create(@RequestBody Teacher teacher){
         teacherService.create(teacher);
-        return new ResponseEntity<>(teacher, HttpStatus.CREATED);
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("status", HttpStatus.CREATED.value());
+        response.put("message", "Teacher created successfully");
+        response.put("body", teacher);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @PutMapping("/update/{id}")
@@ -52,9 +69,13 @@ public class TeacherController {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "404", description = "NOT_FOUND")
     })
-    public ResponseEntity<Teacher> update(@RequestBody Teacher teacher, @PathVariable Long id){
+    public ResponseEntity<?> update(@RequestBody Teacher teacher, @PathVariable Long id){
         Teacher teacherUpdate=teacherService.update(teacher, id);
-        return new ResponseEntity<>(teacherUpdate, HttpStatus.OK);
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("status", HttpStatus.OK.value());
+        response.put("message", "Teacher updated successfully");
+        response.put("body", teacherUpdate);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -62,18 +83,22 @@ public class TeacherController {
     @ApiResponse(responseCode = "204", description = "NO_CONTENT")
     public ResponseEntity<?> delete(@PathVariable Long id){
         teacherService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("status", HttpStatus.NO_CONTENT.value());
+        response.put("message", "Teacher deleted");
+        return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/countBySpeciality/{speciality}")
     @Operation(summary = "Count teachers by speciality",
             description="Enter the specialization of the degree for which you want to count the teachers")
     @ApiResponse(responseCode = "200", description = "OK")
-    public ResponseEntity<HashMap<String, String>> countBySpeciality(@PathVariable String speciality){
+    public ResponseEntity<?> countBySpeciality(@PathVariable String speciality){
         Long countTeacher=teacherService.countBySpeciality(speciality);
-        HashMap<String, String> response= new HashMap<>();
+        HashMap<String, Object> response= new LinkedHashMap<>();
         String message="The number of teachers in the " + speciality + " speciality is: " + countTeacher.toString();
+        response.put("status", HttpStatus.OK.value());
         response.put("message", message);
-        return ResponseEntity.ok(response);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

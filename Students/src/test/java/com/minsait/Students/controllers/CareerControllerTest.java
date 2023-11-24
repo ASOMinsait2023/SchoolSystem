@@ -37,7 +37,7 @@ class CareerControllerTest {
         mvc.perform(post("/api/v1/careers/save")
                      .contentType(MediaType.APPLICATION_JSON)
                      .content(careerMapper))
-             .andExpect(jsonPath("$.status").value("Created"))
+             .andExpect(jsonPath("$.status").value(201))
              .andExpect(jsonPath("$.message").value("Career created"))
              .andExpect(status().isCreated());
     }
@@ -47,8 +47,8 @@ class CareerControllerTest {
         when(careerService.getById(1L)).thenReturn(Datos.getCareer());
         mvc.perform(get("/api/v1/careers/1")
                        .contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.id").value(1))
-            .andExpect(jsonPath("$.name").value(Datos.getCareer().getName()))
+            .andExpect(jsonPath("$.body.id").value(1))
+            .andExpect(jsonPath("$.body.name").value(Datos.getCareer().getName()))
             .andExpect(status().isOk());
     }
 }
