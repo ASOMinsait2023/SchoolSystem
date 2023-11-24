@@ -1,5 +1,50 @@
-server:
-  port: 8080
 spring:
   application:
     name: msvc-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: students
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/v1/students/**
+
+        - id: careers
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/v1/careers/**
+
+        - id: subject
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/v1/subjects/**
+
+        - id: subject_types
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/v1/subject_types/**
+
+        - id: teacher
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/v1/teacher/**
+
+        - id: degree
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/v1/degree/**
+
+        - id: classroom
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/v1/classrooms/**
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    register-with-eureka: false

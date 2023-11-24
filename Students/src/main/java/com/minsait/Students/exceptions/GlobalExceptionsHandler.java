@@ -19,7 +19,7 @@ public class GlobalExceptionsHandler{
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<?> noSuchElementExceptionHandler(NoSuchElementException exception){
         Map<String, Object> response = new LinkedHashMap<>();
-        response.put("Status", "Not found");
+        response.put("Status", HttpStatus.NOT_FOUND.value());
         response.put("Message", exception.getMessage());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
