@@ -12,6 +12,6 @@ spring:
       ddl-auto: update
       show-sql: true
   datasource:
-    url: jdbc:postgresql://localhost:5432/SchoolSystem
+    url: jdbc:postgresql://localhost:5432/school_system
     username: postgres
-    password: postgres
+    password: root

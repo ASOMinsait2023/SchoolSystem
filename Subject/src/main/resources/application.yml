@@ -2,7 +2,7 @@ spring:
   application:
     name: msvc-subject
   datasource:
-    url: jdbc:postgresql://localhost:5432/testdb
+    url: jdbc:postgresql://localhost:5432/school_system
     username: postgres
     password: root
   config:
@@ -13,6 +13,10 @@ spring:
     properties:
       hibernate:
         format_sql: true
+        properties:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
 
 logging:
   level:

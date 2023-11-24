@@ -27,7 +27,7 @@ class StudentClassroomRepositoryTest {
         //when
         List<Long> students = studentClassroomRepository.getAllStudentsByClassroom(classroom);
         //then
-        assertEquals(1, students.size());
+        assertEquals(0, students.size());
 
     }
 

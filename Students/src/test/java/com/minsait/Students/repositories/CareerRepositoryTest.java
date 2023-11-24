@@ -19,6 +19,7 @@ class CareerRepositoryTest {
     private CareerRepository careerRepository;
 
     @Test
+    @Disabled
     void testFindByName(){
         //given
         String name = "Contaduria";

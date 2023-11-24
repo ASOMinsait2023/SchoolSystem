@@ -2,9 +2,9 @@ spring:
   application:
     name: msvc-classroom
   datasource:
-    url: jdbc:postgresql://localhost:5432/SchoolSystem
+    url: jdbc:postgresql://localhost:5432/school_system
     username: postgres
-    password: postgres
+    password: root
   config:
     import: optional:configserver:http://localhost:8888
   jpa:
