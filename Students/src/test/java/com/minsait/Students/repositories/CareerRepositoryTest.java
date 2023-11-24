@@ -19,7 +19,6 @@ class CareerRepositoryTest {
     private CareerRepository careerRepository;
 
     @Test
-    @Disabled
     void testFindByName(){
         //given
         String name = "Contaduria";
@@ -27,7 +26,6 @@ class CareerRepositoryTest {
         Optional<Career> career = careerRepository.findByName(name);
         //then
         assertTrue(career.isPresent());
-
     }
 
 }
